@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Wallet.Web.Data
+namespace Wallet.Identity.Identity
 {
     public class ApplicationDbContext : IdentityDbContext
     {
