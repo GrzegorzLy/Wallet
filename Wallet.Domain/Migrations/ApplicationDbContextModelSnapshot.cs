@@ -190,7 +190,8 @@ namespace Wallet.Domain.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("Amount");
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(8, 2)");
 
                     b.Property<DateTime>("CreateAt");
 
@@ -213,7 +214,8 @@ namespace Wallet.Domain.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("Budget");
+                    b.Property<decimal>("Budget")
+                        .HasColumnType("decimal(8, 2)");
 
                     b.Property<DateTime>("CreateAt");
 

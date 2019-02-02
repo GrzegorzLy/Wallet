@@ -20,15 +20,18 @@
 
     public class AddItemCommandHandler : RequestHandler<AddItemCommand>
     {
-        private ItemRepository _itemReposiotry;
+        private IItemRepository _itemReposiotry;
 
-        public AddItemCommandHandler(ItemRepository itemReposiotry)
+        public AddItemCommandHandler(IItemRepository itemReposiotry)
         {
             this._itemReposiotry = itemReposiotry;
         }
 
         protected override void Handle(AddItemCommand request)
         {
+            if (string.IsNullOrEmpty(request.Name) || request.WalletId == 0)
+                throw new System.ArgumentException();
+
             var entity = new Item(request.Amount, request.Name, request.WalletId);
             _itemReposiotry.Add(entity);
             _itemReposiotry.Save();

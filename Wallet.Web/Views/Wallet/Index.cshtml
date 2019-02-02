@@ -1,7 +1,8 @@
-﻿@model WalletViewModel
+﻿@model WalletDto
 
 @{
     ViewData["Title"] = "Wallet";
+    var counter = 1;
 }
 
 <partial name="Wallet" />
@@ -20,25 +21,24 @@
         <tbody>
             <partial name="ItemAdd" model="new Wallet.Domain.Handlers.Items.AddItemCommand { WalletId = Model.Id }" />
 
-            @for (int i = 0; i < Model.Items.Count; i++)
+            @foreach (var item in Model.Items)
             {
-            <tr>
-                <th scope="row">i + 2</th>
-                <td>
-                    @Model.Items[i].Name
-                </td>
-                <td>
-                    @Model.Items[i].Amount
-                </td>
-                <td>
-                    <input type="submit" class="btn float-right" value="Delete" formaction="delete" r>
-                </td>
-            </tr>
+                counter++;
+
+                <tr>
+                    <th scope="row">@counter</th>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.Amount
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "DelateItem" ,"Wallet", new { id = item.Id }, new {@class ="btn btn-dark float-right" })
+                    </td>
+                </tr>
             }
-
-
-
-
+           
         </tbody>
     </table>
    

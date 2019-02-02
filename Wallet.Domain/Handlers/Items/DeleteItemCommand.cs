@@ -22,6 +22,7 @@
         protected override void Handle(DeleteItemCommand request)
         {
             _itemReposiotry.Delete(request.Id);
+
             _itemReposiotry.Save();
         }
     }

@@ -10,8 +10,8 @@ using Wallet.Identity.Identity;
 namespace Wallet.Domain.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190202000055_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20190202135606_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -192,7 +192,8 @@ namespace Wallet.Domain.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("Amount");
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(8, 2)");
 
                     b.Property<DateTime>("CreateAt");
 
@@ -215,7 +216,8 @@ namespace Wallet.Domain.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("Budget");
+                    b.Property<decimal>("Budget")
+                        .HasColumnType("decimal(8, 2)");
 
                     b.Property<DateTime>("CreateAt");
 

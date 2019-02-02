@@ -17,6 +17,7 @@ using Wallet.Domain.Repository;
 using AutoMapper;
 using Wallet.Web.Models;
 using MediatR;
+using Wallet.Web.Mapper;
 
 namespace Wallet.Web
 {
@@ -51,11 +52,7 @@ namespace Wallet.Web
 
             services.AddScoped<IWalletReposiotry, WalletRepository>();
             services.AddScoped<IItemRepository, ItemRepository>();
-
-            Mapper.Initialize(cfg =>
-            cfg.AddProfiles(new[] {
-            typeof(MapperProfile),
-            }));
+            services.AddSingleton(AutoMapperConfig.Initialize());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Wallet.Domain.Dto
 {
@@ -11,6 +13,8 @@ namespace Wallet.Domain.Dto
         public decimal Budget { get; set; }
 
         public string User { get; set; }
+
+        public IEnumerable<ItemDto> Items { get; set; }
         
     }
 }

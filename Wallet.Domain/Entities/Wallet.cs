@@ -2,9 +2,11 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Wallet : Entity
     {
+        [Column(TypeName = "decimal(8, 2)")]
         public decimal Budget { get; set; }
 
         public string User { get; set; }
