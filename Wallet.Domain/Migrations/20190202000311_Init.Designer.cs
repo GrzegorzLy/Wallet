@@ -10,8 +10,8 @@ using Wallet.Identity.Identity;
 namespace Wallet.Domain.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190130213138_initializeDB2")]
-    partial class initializeDB2
+    [Migration("20190202000311_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -186,6 +186,48 @@ namespace Wallet.Domain.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Wallet.Domain.Entities.Item", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("Amount");
+
+                    b.Property<DateTime>("CreateAt");
+
+                    b.Property<string>("Name");
+
+                    b.Property<DateTime>("UpdateAt");
+
+                    b.Property<int>("WalletId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("WalletId");
+
+                    b.ToTable("Items");
+                });
+
+            modelBuilder.Entity("Wallet.Domain.Entities.Wallet", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("Budget");
+
+                    b.Property<DateTime>("CreateAt");
+
+                    b.Property<DateTime>("UpdateAt");
+
+                    b.Property<string>("User");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Wallets");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -228,6 +270,14 @@ namespace Wallet.Domain.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Wallet.Domain.Entities.Item", b =>
+                {
+                    b.HasOne("Wallet.Domain.Entities.Wallet", "Wallet")
+                        .WithMany("Items")
+                        .HasForeignKey("WalletId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

@@ -1,0 +1,83 @@
+﻿@model WalletViewModel
+
+@{
+    ViewData["Title"] = "Wallet";
+}
+
+<partial name="Wallet" />
+
+@if (Model.Budget > 0)
+{
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Nr.</th>
+                <th scope="col">Name</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <partial name="ItemAdd" model="new Wallet.Domain.Handlers.Items.AddItemCommand { WalletId = Model.Id }" />
+
+            @for (int i = 0; i < Model.Items.Count; i++)
+            {
+            <tr>
+                <th scope="row">i + 2</th>
+                <td>
+                    @Model.Items[i].Name
+                </td>
+                <td>
+                    @Model.Items[i].Amount
+                </td>
+                <td>
+                    <input type="submit" class="btn float-right" value="Delete" formaction="delete" r>
+                </td>
+            </tr>
+            }
+
+
+
+
+        </tbody>
+    </table>
+   
+}
+@*<table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Nr.</th>
+                <th scope="col">Name</th>
+                <th scope="col">Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <th scope="row">1</th>
+                <td>
+                    <input type="text" asp-for="Item.Name" />
+                </td>
+                <td>
+                    <input type="number" asp-for="Item.Amount" />
+                </td>
+            </tr>
+            <tr>
+                @foreach (var it in Model.Items)
+                {
+                    counter++;
+                    <th scope="row">counter</th>
+                    <td>
+                        <input type="text" asp-for=@it.Name />
+                    </td>
+                    <td>
+                        <input type="number" asp-for=@it.Amount />
+                    </td>
+                }
+            </tr>
+        </tbody>
+    </table>
+
+
+    <input type="submit" class="btn btn-primary float-right" value="Send">*@
+

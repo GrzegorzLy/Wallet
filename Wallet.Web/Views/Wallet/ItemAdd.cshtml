@@ -1,0 +1,21 @@
+﻿@model Wallet.Domain.Handlers.Items.AddItemCommand
+
+<form asp-controller="Wallet" asp-action="AddItem"
+      class="form-horizontal"
+      method="post">
+    <input type="hidden" asp-for="WalletId" />
+    <tr>
+        <th scope="row">1</th>
+        <td>
+            <input type="text" asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </td>
+        <td>
+            <input type="number" asp-for="Amount" class="form-control" />
+            <span asp-validation-for="Amount" class="text-danger"></span>
+        </td>
+        <td>
+            <button class="btn btn-primary" type="submit">Add</button>
+        </td>
+    </tr>
+    </form>

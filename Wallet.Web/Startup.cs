@@ -13,6 +13,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Wallet.Identity.Identity;
+using Wallet.Domain.Repository;
+using AutoMapper;
+using Wallet.Web.Models;
+using MediatR;
 
 namespace Wallet.Web
 {
@@ -41,8 +45,17 @@ namespace Wallet.Web
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-
+            services.AddMediatR();
+            services.AddAutoMapper();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddScoped<IWalletReposiotry, WalletRepository>();
+            services.AddScoped<IItemRepository, ItemRepository>();
+
+            Mapper.Initialize(cfg =>
+            cfg.AddProfiles(new[] {
+            typeof(MapperProfile),
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,8 +83,9 @@ namespace Wallet.Web
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Wallet}/{action=Index}/{id?}");
             });
         }
     }
 }
+

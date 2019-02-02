@@ -1,0 +1,21 @@
+﻿@model Wallet.Domain.Dto.WalletDto
+
+<h3>Add your Budget:</h3>
+<form asp-controller="Wallet" asp-action="SaveWallet"
+      class="form-horizontal"
+      method="post">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="User" />
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group row">
+        @Html.LabelFor(m => m.Budget)
+        <div class="col-md-8">
+            @Html.EditorFor(m => m.Budget)
+            @Html.ValidationMessageFor(m => m.Budget)
+        </div>
+        <div class="col-md-2">
+            <input type="submit" class="btn btn-primary float-right" value="Send">
+        </div>
+    </div>
+</form>
