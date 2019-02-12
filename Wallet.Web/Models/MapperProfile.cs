@@ -13,11 +13,6 @@ namespace Wallet.Web.Models
         {
             CreateMap<Domain.Entities.Wallet, WalletDto>();
             CreateMap<Domain.Entities.Item, ItemDto>();
-
-
-            CreateMap<Wallet.Domain.Entities.Wallet, WalletViewModel>();
-            CreateMap<Wallet.Domain.Entities.Item, WalletItemViewModel>();
-
         }
     }
 }

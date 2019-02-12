@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -16,12 +17,18 @@ namespace Wallet.Tests.Wallet
     {
         private Mock<IWalletReposiotry> _walletReposiotry;
         private IRequestHandler<WalletQuery, WalletDto> handler;
+        private IMapper _mapper;
 
         [SetUp]
         public void SetUp()
         {
             _walletReposiotry = new Mock<IWalletReposiotry>();
-            handler = new WalletQueryHandler(_walletReposiotry.Object);
+            _mapper = new MapperConfiguration((cfg =>
+            {
+                cfg.CreateMap<Domain.Entities.Wallet, WalletDto>();
+                cfg.CreateMap<Domain.Entities.Item, ItemDto>();             
+            })).CreateMapper();
+            handler = new WalletQueryHandler(_walletReposiotry.Object, _mapper);
         }
 
         [Test]
