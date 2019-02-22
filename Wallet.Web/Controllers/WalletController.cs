@@ -10,7 +10,7 @@
     public class WalletController : Controller
     {
         private readonly IMediator _mediator;
-
+            
         public WalletController(IMediator mediator)
         {
             _mediator = mediator;

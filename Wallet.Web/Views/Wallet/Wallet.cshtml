@@ -1,10 +1,12 @@
 ﻿@model Wallet.Domain.Dto.WalletDto
 
 @{ 
-    var outgoings = Model.Items.Sum(a => a.Amount);
+    var outgoings = Model.Items?.Sum(a => a.Amount);
+    var hasBudget = Model.Budget > 0;
+    var tittle = hasBudget ? "Your budget:" : "Add your Budget:";
 }
 
-<h3>Add your Budget:</h3>
+<h3>@tittle</h3>
 <form asp-controller="Wallet" asp-action="SaveWallet"
       class="form-horizontal"
       method="post">
@@ -14,15 +16,24 @@
 
     <div class="form-group row">
         @Html.LabelFor(m => m.Budget)
-        <div class="col-md-4">
-            <input type="number" asp-for="Budget" />
-        </div>
-        <div class="col-md-2">
-            <input type="submit" class="btn btn-primary" value="Send">
-        </div>
+        @if (hasBudget)
+        {
+            <div class="col-md-4">
+                @Model.Budget
+            </div>
+        }
+        else
+        {
+            <div class="col-md-4">
+                <input type="number" asp-for="Budget" />
+            </div>
+            <div class="col-md-2">
+                <input type="submit" class="btn btn-primary" value="Send">
+            </div>
+        }
         <h5 class="col-md-3">
             Outgoings:
             <span class="badge badge-danger">@outgoings</span>
-        </h5> 
+        </h5>
     </div>
 </form>
